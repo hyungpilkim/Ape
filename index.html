@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple jQuery Frame Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+<div id="content">
+    <h1>Welcome to My Frame</h1>
+</div>
+
+<button id="addContent">Add Content</button>
+
+<script>
+$(document).ready(function(){
+    $("#addContent").click(function(){
+        
+    });
+	
+	getUserName();
+	
+});
+
+function getUserName() {
+    fetch(`http://127.0.0.1:2281/v1/info?dbstats=1`, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+		$("#content").append(data.json());
+        console.log(data); // Process and display your tip balance data
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+function fetchFID() {
+    const apiKey = 'DKJS7-7NSO1-3CBMY-M5IVZ-HD04J';
+    fetch('https://build.far.quest/farcaster/v2/user', {
+        method: 'GET',
+        headers: {
+            'API-KEY': apiKey,
+            'Accept': 'application/json',
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data); 
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+function fetchTipAllowance(fid) {
+    fetch(`https://www.degen.tips/api/airdrop2/tip-allowance?fid=${fid}`, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data); // Process and display your tip balance data
+    })
+    .catch(error => console.error('Error:', error));
+}
+</script>
+
+</body>
+</html>
